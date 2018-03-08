@@ -1,9 +1,9 @@
 # React FilePond
 
-A FilePond component for React.
+A [FilePond](https://github.com/pqina/filepond) component for React.
 
 ```bash
-npm install react-filepond
+npm install react-filepond --save
 ```
 
 Basic usage in JSX.
