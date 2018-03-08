@@ -23,8 +23,9 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+            
                 // Pass FilePond properties as attributes
-                <FilePond allowMultiple={true}>
+                <FilePond allowMultiple={true} maxFiles={3} server='/api'>
                     
                     // Set current files using the <File/> component
                     {this.state.files.map(file => (
