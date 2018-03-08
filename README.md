@@ -1,6 +1,6 @@
 # React FilePond
 
-A React wrapper component for FilePond.
+A FilePond component for React.
 
 ```bash
 npm install react-filepond
@@ -23,10 +23,14 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+                // Pass FilePond properties as attributes
                 <FilePond allowMultiple={true}>
+                    
+                    // Set current files using the <File/> component
                     {this.state.files.map(file => (
                         <File key={file} source={file} />
                     ))}
+                    
                 </FilePond>
             </div>
         );
