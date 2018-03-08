@@ -1,0 +1,26 @@
+{
+    "name": "react-filepond",
+    "version": "1.0.0",
+    "description": "FilePond, Where files go to stretch their bits.",
+    "homepage": "https://pqina.nl/filepond",
+    "main": "index.js",
+    "dependencies": {
+        "filepond": "^1.0.8",
+        "react": "^16.2.0"
+    },
+    "keywords": [
+        "react",
+        "file",
+        "upload",
+        "drag",
+        "drop",
+        "browse",
+        "image",
+        "preview"
+    ],
+    "license": "MIT",
+    "author": {
+        "name": "PQINA",
+        "url": "https://pqina.nl"
+    }
+}
