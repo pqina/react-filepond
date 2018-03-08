@@ -48,3 +48,7 @@ const process = (fieldName, file, metadata, load, error, progress, abort) => {
 }
 <FilePond server={{ process }}></FilePond>
 ```
+
+## Licensing
+
+[Read FilePond readme for licensing options](https://github.com/pqina/filepond#license)
