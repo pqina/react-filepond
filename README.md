@@ -38,7 +38,7 @@ class App extends Component {
     }
 }
 ```
-[Read the docs](https://pqina.nl/filepond/docs/patterns/frameworks/react/) for more information.
+[Read the docs for more information](https://pqina.nl/filepond/docs/patterns/frameworks/react/)
 
 ## Licensing
 
