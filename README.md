@@ -38,16 +38,7 @@ class App extends Component {
     }
 }
 ```
-
-Set custom processing method.
-
-```jsx
-const process = (fieldName, file, metadata, load, error, progress, abort) => {
-    // handle file upload, more information here:
-    // https://pqina.nl/filepond/docs/patterns/api/server/#advanced
-}
-<FilePond server={{ process }}></FilePond>
-```
+[Read the docs](https://pqina.nl/filepond/docs/patterns/frameworks/react/) for more information.
 
 ## Licensing
 
