@@ -1,16 +1,27 @@
 # React FilePond
 
-A [FilePond](https://github.com/pqina/filepond) component for React.
+React FilePond is a handy wrapper component for [FilePond](https://github.com/pqina/filepond), a JavaScript library that can upload anything you throw at it, optimizes images for faster uploads, and offers a great, accessible, silky smooth user experience.
+
+<img src="https://github.com/pqina/filepond-github-assets/blob/master/filepond-animation-01.gif" width="370" alt=""/>
+
+Installation:
 
 ```bash
 npm install react-filepond --save
 ```
 
-Basic usage in JSX.
+Usage:
 
 ```jsx
-import { FilePond, File } from 'react-filepond';
+// Import FilePond
+import { FilePond, File, registerPlugin } from 'react-filepond';
 
+// Register the image preview plugin
+import FilePondImagePreview from 'filepond-plugin-image-preview';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+registerPlugin(FilePondImagePreview);
+
+// Our app
 class App extends Component {
     constructor(props) {
         super(props);
@@ -39,16 +50,4 @@ class App extends Component {
 }
 ```
 
-Set custom processing method.
-
-```jsx
-const process = (fieldName, file, metadata, load, error, progress, abort) => {
-    // handle file upload, more information here:
-    // https://pqina.nl/filepond/docs/patterns/api/server/#advanced
-}
-<FilePond server={{ process }}></FilePond>
-```
-
-## Licensing
-
-[Read FilePond readme for licensing options](https://github.com/pqina/filepond#license)
+[Read the docs for more information](https://pqina.nl/filepond/docs/patterns/frameworks/react/)
