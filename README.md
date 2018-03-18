@@ -1,9 +1,9 @@
 # React FilePond
 
-A React wrapper component for FilePond.
+A [FilePond](https://github.com/pqina/filepond) component for React.
 
 ```bash
-npm install react-filepond
+npm install react-filepond --save
 ```
 
 Basic usage in JSX.
@@ -23,13 +23,32 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <FilePond allowMultiple={true}>
+            
+                // Pass FilePond properties as attributes
+                <FilePond allowMultiple={true} maxFiles={3} server='/api'>
+                    
+                    // Set current files using the <File/> component
                     {this.state.files.map(file => (
                         <File key={file} source={file} />
                     ))}
+                    
                 </FilePond>
             </div>
         );
     }
 }
 ```
+
+Set custom processing method.
+
+```jsx
+const process = (fieldName, file, metadata, load, error, progress, abort) => {
+    // handle file upload, more information here:
+    // https://pqina.nl/filepond/docs/patterns/api/server/#advanced
+}
+<FilePond server={{ process }}></FilePond>
+```
+
+## Licensing
+
+[Read FilePond readme for licensing options](https://github.com/pqina/filepond#license)

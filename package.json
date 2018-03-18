@@ -1,7 +1,7 @@
 {
     "name": "react-filepond",
-    "version": "1.0.0",
-    "description": "FilePond, Where files go to stretch their bits.",
+    "version": "1.1.0",
+    "description": "A FilePond component for React",
     "homepage": "https://pqina.nl/filepond",
     "main": "index.js",
     "dependencies": {
@@ -10,6 +10,7 @@
     },
     "keywords": [
         "react",
+        "filepond",
         "file",
         "upload",
         "drag",
