@@ -5,7 +5,7 @@
     "homepage": "https://pqina.nl/filepond",
     "main": "index.js",
     "dependencies": {
-        "filepond": "^1.2.1",
+        "filepond": "^1.2.6",
         "react": "^16.2.0"
     },
     "keywords": [
