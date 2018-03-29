@@ -63,6 +63,10 @@ export class FilePond extends React.Component {
 
     // Create our pond
     this._pond = create(this._element, Object.assign({}, this.props, files));
+    
+    this._pond.setOptions({
+      files,
+    });
 
     // Reference pond methods to FilePond component instance
     Object.keys(this._pond)
@@ -90,11 +94,6 @@ export class FilePond extends React.Component {
     }
 
     const options = Object.assign({}, this.props);
-
-    // file list has changed
-    if (prevProps.children !== this.props.children) {
-      options.files = getFilesFromChildren(this.props.children);
-    }
 
     this._pond.setOptions(options);
   }
