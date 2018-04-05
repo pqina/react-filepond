@@ -1,13 +1,12 @@
 {
     "name": "react-filepond",
-    "version": "1.2.0",
-    "description": " A handy FilePond wrapper component for React",
+    "version": "1.2.1",
+    "description": "A handy FilePond adapter component for React",
     "homepage": "https://pqina.nl/filepond",
-    "main": "index.js",
-    "dependencies": {
-        "filepond": "^1.2.6",
-        "react": "^16.2.0"
-    },
+    "license": "MIT",
+    "main": "dist/react-filepond.js",
+    "browser": "dist/react-filepond.js",
+    "module": "lib/index.js",
     "keywords": [
         "react",
         "filepond",
@@ -19,9 +18,30 @@
         "image",
         "preview"
     ],
-    "license": "MIT",
     "author": {
         "name": "PQINA",
         "url": "https://pqina.nl"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/pqina/react-filepond.git"
+    },
+    "scripts": {
+        "build": "babel lib --out-file dist/react-filepond.js",
+        "build:watch": "babel lib -w --out-file dist/react-filepond.js",
+        "prepare": "npm run build"
+    },
+    "dependencies": {
+        "filepond": "^1.2.7"
+    },
+    "peerDependencies": {
+        "react-dom": "^16.3.1",
+        "react": "^16.3.1"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-core": "^6.26.0",
+        "babel-preset-env": "^1.6.1",
+        "babel-preset-react": "^6.24.1"
     }
 }
