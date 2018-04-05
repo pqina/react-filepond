@@ -17,8 +17,11 @@ npm install react-filepond --save
 Usage:
 
 ```jsx
-// Import FilePond
+// Import React FilePond
 import { FilePond, File, registerPlugin } from 'react-filepond';
+
+// Import FilePond styles
+import 'filepond/dist/filepond.min.css';
 
 // Register the image preview plugin
 import FilePondImagePreview from 'filepond-plugin-image-preview';

@@ -1,5 +1,5 @@
 /*!
- * react-filepond v1.2.4
+ * react-filepond v2.0.0
  * A handy FilePond adapter component for React
  * 
  * Copyright (c) 2018 PQINA
@@ -12,7 +12,6 @@ import React, { createElement } from 'react';
 
 // Import required methods and styles from the FilePond module, should not need anything else
 import { create, supported, registerPlugin } from 'filepond';
-import 'filepond/dist/filepond.min.css';
 
 // We need to be able to call the registerPlugin method directly so we can add plugins
 export { registerPlugin };

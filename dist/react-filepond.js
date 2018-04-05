@@ -1,5 +1,5 @@
 /*!
- * react-filepond v1.2.4
+ * react-filepond v2.0.0
  * A handy FilePond adapter component for React
  * 
  * Copyright (c) 2018 PQINA
@@ -22,8 +22,6 @@ var _react = require('react');
 var _react2 = _interopRequireDefault(_react);
 
 var _filepond = require('filepond');
-
-require('filepond/dist/filepond.min.css');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
