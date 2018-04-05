@@ -1,6 +1,6 @@
 {
     "name": "react-filepond",
-    "version": "1.2.3",
+    "version": "1.2.4",
     "description": "A handy FilePond adapter component for React",
     "homepage": "https://pqina.nl/filepond",
     "license": "MIT",
@@ -29,7 +29,7 @@
     "scripts": {
         "build": "mkdirp dist && npm run build:browser && npm run build:module",
         "build:browser": "babel lib | bannerjs -m > dist/react-filepond.js",
-        "build:module": "cat lib/index.js | bannerjs -m > dist/react-filepond.esm.js",
+        "build:module": "minicat lib/index.js | bannerjs -m > dist/react-filepond.esm.js",
         "build:watch": "nodemon --watch lib -x \"npm run build\"",
         "prepare": "npm run build"
     },
@@ -46,6 +46,7 @@
         "babel-preset-env": "^1.6.1",
         "babel-preset-react": "^6.24.1",
         "bannerjs": "^1.0.5",
+        "minicat": "^1.0.0",
         "mkdirp": "^0.5.1",
         "nodemon": "^1.17.3"
     }

@@ -1,5 +1,5 @@
 /*!
- * react-filepond v1.2.3
+ * react-filepond v1.2.4
  * A handy FilePond adapter component for React
  * 
  * Copyright (c) 2018 PQINA
@@ -136,3 +136,4 @@ export class FilePond extends React.Component {
 
 // <File/>, needs to be further extended with prop types
 export class File extends React.Component { }
+
