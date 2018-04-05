@@ -1,3 +1,13 @@
+/*!
+ * react-filepond v1.2.2
+ * A handy FilePond adapter component for React
+ * 
+ * Copyright (c) 2018 PQINA
+ * https://pqina.nl/filepond
+ * 
+ * Licensed under the MIT license.
+ */
+
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22,12 +32,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-/*
- * React FilePond 1.2.0
- * Licensed under MIT, https://opensource.org/licenses/MIT
- * Please visit https://pqina.nl/filepond for details.
- */
-
 
 // Import required methods and styles from the FilePond module, should not need anything else
 
@@ -177,3 +181,5 @@ var File = exports.File = function (_React$Component2) {
 
   return File;
 }(_react2.default.Component);
+
+

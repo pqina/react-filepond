@@ -1,12 +1,12 @@
 {
     "name": "react-filepond",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "description": "A handy FilePond adapter component for React",
     "homepage": "https://pqina.nl/filepond",
     "license": "MIT",
     "main": "dist/react-filepond.js",
     "browser": "dist/react-filepond.js",
-    "module": "lib/index.js",
+    "module": "dist/react-filepond.esm.js",
     "keywords": [
         "react",
         "filepond",
@@ -27,8 +27,10 @@
         "url": "https://github.com/pqina/react-filepond.git"
     },
     "scripts": {
-        "build": "babel lib --out-file dist/react-filepond.js",
-        "build:watch": "babel lib -w --out-file dist/react-filepond.js",
+        "build": "npm run build:browser && npm run build:module",
+        "build:browser": "babel lib | bannerjs -m > dist/react-filepond.js",
+        "build:module": "cat lib/index.js | bannerjs -m > dist/react-filepond.esm.js",
+        "build:watch": "nodemon --watch lib -x \"npm run build\"",
         "prepare": "npm run build"
     },
     "dependencies": {
@@ -42,6 +44,8 @@
         "babel-cli": "^6.26.0",
         "babel-core": "^6.26.0",
         "babel-preset-env": "^1.6.1",
-        "babel-preset-react": "^6.24.1"
+        "babel-preset-react": "^6.24.1",
+        "bannerjs": "^1.0.5",
+        "nodemon": "^1.17.3"
     }
 }

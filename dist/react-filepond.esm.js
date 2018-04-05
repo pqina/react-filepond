@@ -1,3 +1,13 @@
+/*!
+ * react-filepond v1.2.2
+ * A handy FilePond adapter component for React
+ * 
+ * Copyright (c) 2018 PQINA
+ * https://pqina.nl/filepond
+ * 
+ * Licensed under the MIT license.
+ */
+
 import React, { createElement } from 'react';
 
 // Import required methods and styles from the FilePond module, should not need anything else
