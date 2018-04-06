@@ -17,44 +17,55 @@ npm install react-filepond --save
 Usage:
 
 ```jsx
-// Import React FilePond
-import { FilePond, File, registerPlugin } from 'react-filepond';
+import React, { Component } from "react";
+import { FilePond, File, registerPlugin } from "react-filepond";
 
 // Import FilePond styles
-import 'filepond/dist/filepond.min.css';
+import "filepond/dist/filepond.min.css";
 
-// Register the image preview plugin
-import FilePondImagePreview from 'filepond-plugin-image-preview';
-import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+// Register plugin
+import FilePondImagePreview from "filepond-plugin-image-preview";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 registerPlugin(FilePondImagePreview);
 
-// Our app
 class App extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            files: ['index.html']
-        };
-    }
+    this.state = {
+      files: []
+    };
+  }
 
-    render() {
-        return (
-            <div className="App">
-            
-                // Pass FilePond properties as attributes
-                <FilePond allowMultiple={true} maxFiles={3} server='/api'>
-                    
-                    // Set current files using the <File/> component
-                    {this.state.files.map(file => (
-                        <File key={file} source={file} />
-                    ))}
-                    
-                </FilePond>
-            </div>
-        );
-    }
+  handleInit() {
+    console.log("now initialised", this.pond);
+  }
+
+  handleProcessing(fieldName, file, metadata, load, error, progress, abort) {
+    // handle file upload here
+  }
+
+  render() {
+    return (
+      <div className="App">
+        {/* Pass FilePond properties as attributes */}
+        <FilePond
+          allowMultiple={true}
+          maxFiles={3}
+          ref={ref => (this.pond = ref)}
+          server={{ process: this.handleProcessing.bind(this) }}
+          oninit={() => this.handleInit()}
+        >
+          {/* Set current files using the <File /> component */}
+          <File />
+          {this.state.files.map(file => <File key={file} source={file} />)}
+        </FilePond>
+      </div>
+    );
+  }
 }
+
+export default App;
 ```
 
 [Read the docs for more information](https://pqina.nl/filepond/docs/patterns/frameworks/react/)
