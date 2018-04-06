@@ -56,7 +56,7 @@ class App extends Component {
           server={{ process: this.handleProcessing.bind(this) }}
           oninit={() => this.handleInit()}
         >
-          {/* Set current files using the component */}
+          {/* Set current files using the <File /> component */}
           <File />
           {this.state.files.map(file => <File key={file} source={file} />)}
         </FilePond>
