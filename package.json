@@ -1,6 +1,6 @@
 {
     "name": "react-filepond",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "description": "A handy FilePond adapter component for React",
     "homepage": "https://pqina.nl/filepond",
     "license": "MIT",
@@ -9,6 +9,7 @@
     "module": "dist/react-filepond.esm.js",
     "keywords": [
         "react",
+        "reactjs",
         "filepond",
         "file",
         "upload",
