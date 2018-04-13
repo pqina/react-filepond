@@ -4,6 +4,7 @@
     "description": "A handy FilePond adapter component for React",
     "homepage": "https://pqina.nl/filepond",
     "license": "MIT",
+    "repository": "pqina/react-filepond",
     "main": "dist/react-filepond.js",
     "browser": "dist/react-filepond.js",
     "module": "dist/react-filepond.esm.js",
@@ -22,10 +23,6 @@
     "author": {
         "name": "PQINA",
         "url": "https://pqina.nl"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/pqina/react-filepond.git"
     },
     "scripts": {
         "build": "mkdirp dist && npm run build:browser && npm run build:module",
