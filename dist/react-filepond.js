@@ -1,5 +1,5 @@
 /*!
- * react-filepond v2.0.7
+ * react-filepond v2.0.8
  * A handy FilePond adapter component for React
  * 
  * Copyright (c) 2018 PQINA
@@ -44,16 +44,42 @@ var isSupported = (0, _filepond.supported)();
 // returns file sources from the <File/> child objects
 var getFilesFromChildren = function getFilesFromChildren(children) {
   return children ? _react2.default.Children.map(children, function (child) {
-    if (child.props.type) {
+
+    var props = child.props;
+
+    // new mapping
+    if (props.src) {
+      var options = {};
+      if (props.origin) {
+        options.type = props.origin;
+      }
+      if (props.name) {
+        options.file = {
+          name: props.name,
+          size: props.size,
+          type: props.type
+        };
+      }
+      if (props.metadata) {
+        options.metadata = props.metadata;
+      }
       return {
-        source: child.props.source,
+        source: props.src,
+        options: options
+      };
+    }
+
+    // deprecated mapping
+    if (props.source && props.type) {
+      return {
+        source: props.source,
         options: {
-          type: child.props.type
+          type: props.type
         }
       };
-    } else {
-      return child.props.source;
     }
+
+    return props.source;
   }) : [];
 };
 
@@ -89,7 +115,7 @@ var FilePond = exports.FilePond = function (_React$Component) {
       // Reference pond methods to FilePond component instance
       Object.keys(this._pond).filter(function (key) {
         return !filteredMethods.includes(key);
-      }).forEach(function (key, index) {
+      }).forEach(function (key) {
         _this2[key] = _this2._pond[key];
       });
     }

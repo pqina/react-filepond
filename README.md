@@ -47,7 +47,7 @@ class App extends Component {
                     
                     {/* Set current files using the <File/> component */}
                     {this.state.files.map(file => (
-                        <File key={file} source={file} />
+                        <File key={file} src={file} />
                     ))}
                     
                 </FilePond>
