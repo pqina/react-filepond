@@ -1,5 +1,5 @@
 /*!
- * react-filepond v4.0.0
+ * react-filepond v5.0.0
  * A handy FilePond adapter component for React
  * 
  * Copyright (c) 2018 PQINA
@@ -144,10 +144,10 @@ var FilePond = exports.FilePond = function (_React$Component) {
       }
 
       var options = Object.assign({}, this.props);
+
+      // test if file list has changed
       var previousFiles = getFilesFromChildren(prevProps.children);
       var currentFiles = getFilesFromChildren(this.props.children);
-
-      // file list has changed
       if (JSON.stringify(previousFiles) !== JSON.stringify(currentFiles)) {
         options.files = currentFiles;
       }

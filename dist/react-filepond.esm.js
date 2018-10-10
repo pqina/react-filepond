@@ -1,5 +1,5 @@
 /*!
- * react-filepond v4.0.0
+ * react-filepond v5.0.0
  * A handy FilePond adapter component for React
  * 
  * Copyright (c) 2018 PQINA
@@ -89,7 +89,7 @@ export class FilePond extends React.Component {
     }
 
     // Create our pond
-    this._pond = create(this._element, Object.assign({}, this.props, { files:getFilesFromChildren(this.props.children) }));
+    this._pond = create(this._element, Object.assign({}, this.props, { files: getFilesFromChildren(this.props.children) }));
 
     // Reference pond methods to FilePond component instance
     Object.keys(this._pond)
@@ -117,16 +117,15 @@ export class FilePond extends React.Component {
     }
 
     const options = Object.assign({}, this.props);
+
+    // test if file list has changed
     const previousFiles = getFilesFromChildren(prevProps.children);
     const currentFiles = getFilesFromChildren(this.props.children);
-
-    // file list has changed
     if (JSON.stringify(previousFiles) !== JSON.stringify(currentFiles)) {
       options.files = currentFiles;
     }
 
     this._pond.setOptions(options);
-
   }
 
   // Renders basic element hook for FilePond to attach to

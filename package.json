@@ -1,6 +1,6 @@
 {
     "name": "react-filepond",
-    "version": "4.0.0",
+    "version": "5.0.0",
     "description": "A handy FilePond adapter component for React",
     "homepage": "https://pqina.nl/filepond",
     "license": "MIT",
@@ -31,12 +31,10 @@
         "build:watch": "nodemon --watch lib -x \"npm run build\"",
         "prepare": "npm run build"
     },
-    "dependencies": {
-        "filepond": "^3.0.2"
-    },
     "peerDependencies": {
         "react-dom": "^16.3.1",
-        "react": "^16.3.1"
+        "react": "^16.3.1",
+        "filepond": "^3.0.0"
     },
     "devDependencies": {
         "babel-cli": "^6.26.0",
