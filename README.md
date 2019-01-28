@@ -4,11 +4,19 @@ React FilePond is a handy wrapper component for [FilePond](https://github.com/pq
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/pqina/react-filepond/blob/master/LICENSE)
 [![npm version](https://badge.fury.io/js/react-filepond.svg)](https://www.npmjs.com/package/react-filepond)
-[![Donate with PayPal](https://img.shields.io/badge/donate-PayPal.me-pink.svg)](https://www.paypal.me/rikschennink/10)
+[![Support on Patreon](https://img.shields.io/badge/support-patreon-salmon.svg)](https://www.patreon.com/rikschennink)
 
 <img src="https://github.com/pqina/filepond-github-assets/blob/master/filepond-animation-01.gif" width="370" alt=""/>
 
-Installation:
+
+## Time to learn React
+
+Want to learn React but you don't know where to start? I highly recommend [React for Beginners](http://bit.ly/react-course) by Wes Bos.
+
+If you're already familiar with React and want to brush up your skills [Advanced React](http://bit.ly/react-advanced-course) is a great way to do so.
+
+
+## Installation:
 
 ```bash
 npm install react-filepond filepond --save
