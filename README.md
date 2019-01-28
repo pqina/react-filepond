@@ -9,14 +9,14 @@ React FilePond is a handy wrapper component for [FilePond](https://github.com/pq
 <img src="https://github.com/pqina/filepond-github-assets/blob/master/filepond-animation-01.gif" width="370" alt=""/>
 
 
-## Time to learn React
+## Thinking of learning React?
 
 Want to learn React but you don't know where to start? I highly recommend [React for Beginners](http://bit.ly/react-course) by Wes Bos.
 
 If you're already familiar with React and want to brush up your skills [Advanced React](http://bit.ly/react-advanced-course) is a great way to do so.
 
 
-## Installation:
+## Installation
 
 ```bash
 npm install react-filepond filepond --save
@@ -26,7 +26,7 @@ Usage:
 
 ```jsx
 // Import React FilePond
-import { FilePond, File, registerPlugin } from 'react-filepond';
+import { FilePond, registerPlugin } from 'react-filepond';
 
 // Import FilePond styles
 import 'filepond/dist/filepond.min.css';
@@ -46,8 +46,16 @@ class App extends Component {
         super(props);
 
         this.state = {
-            // Set initial files
-            files: ['index.html']
+            // Set initial files, type 'local' means this is a file
+            // that has already been uploaded to the server (see docs)
+            files: [
+                {
+                    source: 'index.html',
+                    options: {
+                        type: 'local
+                    }
+                }
+            ]
         };
     }
 
@@ -61,22 +69,17 @@ class App extends Component {
             
                 {/* Pass FilePond properties as attributes */}
                 <FilePond ref={ref => this.pond = ref}
-                          allowMultiple={true} 
+                          files={this.state.files}
+                          allowMultiple={true}
                           maxFiles={3} 
                           server="/api"
                           oninit={() => this.handleInit() }
-                          onupdatefiles={(fileItems) => {
-                              // Set current file objects to this.state
+                          onupdatefiles={fileItems => {
+                              // Set currently active file objects to this.state
                               this.setState({
                                   files: fileItems.map(fileItem => fileItem.file)
                               });
                           }}>
-                    
-                    {/* Update current files  */}
-                    {this.state.files.map(file => (
-                        <File key={file} src={file} origin="local" />
-                    ))}
-                    
                 </FilePond>
                 
             </div>
