@@ -1,8 +1,8 @@
 /*!
- * react-filepond v5.0.0
+ * react-filepond v6.0.0
  * A handy FilePond adapter component for React
  * 
- * Copyright (c) 2018 PQINA
+ * Copyright (c) 2019 PQINA
  * https://pqina.nl/filepond
  * 
  * Licensed under the MIT license.
@@ -11,57 +11,13 @@
 import React, { createElement } from 'react';
 
 // Import required methods and styles from the FilePond module, should not need anything else
-import { create, supported, registerPlugin } from 'filepond';
+import { create, supported, registerPlugin, FileStatus } from 'filepond';
 
 // We need to be able to call the registerPlugin method directly so we can add plugins
-export { registerPlugin };
+export { registerPlugin, FileStatus };
 
 // Do this once
 const isSupported = supported();
-
-// returns file sources from the <File/> child objects
-const getFilesFromChildren = children =>
-  children ? React.Children.map(
-    children,
-    child => {
-      
-      const props = child.props;
-
-      // new mapping
-      if (props.src) {
-        const options = {};
-        if (props.origin) {
-          options.type = props.origin;
-        }
-        if (props.name) {
-          options.file = {
-            name: props.name,
-            size: props.size,
-            type: props.type
-          }
-        }
-        if (props.metadata) {
-          options.metadata = props.metadata;
-        }
-        return {
-          source: props.src,
-          options
-        }
-      }
-
-      // deprecated mapping
-      if (props.source && props.type) {
-        return {
-          source: props.source,
-          options: {
-            type: props.type
-          }
-        }
-      }
-      
-      return props.source;
-    }
-  ) : [];
 
 // filtered methods
 const filteredMethods = [
@@ -80,16 +36,31 @@ const filteredMethods = [
 
 // The React <FilePond/> wrapper
 export class FilePond extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.allowFilesSync = true;
+  }
+
   // Will setup FilePond instance when mounted
   componentDidMount() {
 
     // exit here if not supported
-    if (!isSupported) {
-      return;
-    }
+    if (!isSupported) return;
 
+    const options = Object.assign({}, this.props);
+
+    // if onupdate files is defined, make sure setFiles does not cause race condition
+    if (options.onupdatefiles) {
+      const cb = options.onupdatefiles;
+      options.onupdatefiles = (items) => {
+        this.allowFilesSync = false;
+        cb(items);
+      }
+    }
+    
     // Create our pond
-    this._pond = create(this._element, Object.assign({}, this.props, { files: getFilesFromChildren(this.props.children) }));
+    this._pond = create(this._element, options);
 
     // Reference pond methods to FilePond component instance
     Object.keys(this._pond)
@@ -102,29 +73,31 @@ export class FilePond extends React.Component {
   // Will clean up FilePond instance when unmounted
   componentWillUnmount() {
     // exit when no pond defined
-    if (!this._pond) {
-      return;
-    }
-
+    if (!this._pond) return;
     this._pond.destroy();
+    this.allowFilesSync = true;
+  }
+
+  shouldComponentUpdate() {
+    if (!this.allowFilesSync) {
+      this.allowFilesSync = true;
+      return false;
+    }
+    return true;
   }
 
   // Something changed
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
+
     // exit when no pond defined
-    if (!this._pond) {
-      return;
-    }
+    if (!this._pond) return;
 
     const options = Object.assign({}, this.props);
 
-    // test if file list has changed
-    const previousFiles = getFilesFromChildren(prevProps.children);
-    const currentFiles = getFilesFromChildren(this.props.children);
-    if (JSON.stringify(previousFiles) !== JSON.stringify(currentFiles)) {
-      options.files = currentFiles;
-    }
+    // this is only set onces, on didmount
+    delete options.onupdatefiles;
 
+    // update pond options based on new props
     this._pond.setOptions(options);
   }
 
@@ -156,7 +129,4 @@ export class FilePond extends React.Component {
     );
   }
 }
-
-// <File/>, needs to be further extended with prop types
-export class File extends React.Component { }
 
