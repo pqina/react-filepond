@@ -1,5 +1,10 @@
 # Changelog
 
+## 6.0.1
+
+- Fix typo in README
+
+
 ## 6.0.0
 
 - Removed `<File>` component, it created the illusion that it was possible to modify the HTML of FilePond which is not possible. This also simplifies the component making it easier to maintain and keep in sync with FilePond core.

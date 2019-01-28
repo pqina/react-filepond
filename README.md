@@ -48,14 +48,12 @@ class App extends Component {
         this.state = {
             // Set initial files, type 'local' means this is a file
             // that has already been uploaded to the server (see docs)
-            files: [
-                {
-                    source: 'index.html',
-                    options: {
-                        type: 'local
-                    }
+            files: [{
+                source: 'index.html',
+                options: {
+                    type: 'local'
                 }
-            ]
+            }]
         };
     }
 
