@@ -26,7 +26,7 @@ class App extends Component {
         // Set initial files, type 'local' means this is a file
         // that has already been uploaded to the server (see docs)
         files: [{
-            source: 'index.html',
+            source: 'photo.jpeg',
             options: {
                 type: 'local'
             }
@@ -46,12 +46,17 @@ class App extends Component {
                         files={this.state.files}
                         allowMultiple={true}
                         server={{
-                          process: (fieldName, file, metadata, load) => {
-                            // simulates upload
-                            setTimeout(() => {
-                              load(Date.now())
-                            }, 1500);
-                          }
+                            // fake server to simulate loading a 'local' server file and processing a file
+                            process: (fieldName, file, metadata, load) => {
+                                // simulates uploading a file
+                                setTimeout(() => {
+                                    load(Date.now())
+                                }, 1500);
+                            },
+                            load: (source, load) => {
+                                // simulates loading a file from the server
+                                fetch(source).then(res => res.blob()).then(load);
+                            }
                         }}
                         oninit={() => this.handleInit() }
                         onupdatefiles={fileItems => {
