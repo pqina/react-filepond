@@ -89,3 +89,5 @@ class App extends Component {
 ```
 
 [Read the docs for more information](https://pqina.nl/filepond/docs/patterns/frameworks/react/)
+
+[Live Demo with Code Sandbox](https://codesandbox.io/s/github/KimGenius/React-file-pond)
