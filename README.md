@@ -8,12 +8,29 @@ React FilePond is a handy wrapper component for [FilePond](https://github.com/pq
 
 <img src="https://github.com/pqina/filepond-github-assets/blob/master/filepond-animation-01.gif" width="370" alt=""/>
 
+### Core Features
 
-## Thinking of learning React?
+*   Accepts **directories**, **files**, blobs, local URLs, **remote URLs** and Data URIs.
+*   **Drop files**, select on filesystem, **copy and paste files**, or add files using the API.
+*   **Async uploading** with AJAX, or encode files as base64 data and send along form post.
+*   **Accessible**, tested with AT software like VoiceOver and JAWS, **navigable by Keyboard**.
+*   **Image optimization**, automatic image resizing, **cropping**, and **fixes EXIF orientation**.
+*   **Responsive**, automatically scales to available space, is functional on both **mobile and desktop devices**.
 
-Want to learn React but you don't know where to start? I highly recommend [React for Beginners](http://bit.ly/react-course) by Wes Bos.
+[Learn more about FilePond](https://pqina.nl/filepond/)
 
-If you're already familiar with React and want to brush up your skills [Advanced React](http://bit.ly/react-advanced-course) is a great way to do so.
+
+---
+
+### Also need Image Editing?
+
+**Doka.js** might be just what you're looking for. It's a Modern JavaScript Image Editor, Doka supports setting **crop aspect ratios**, **resizing**, **rotating**, **cropping**, and **flipping** images. Above all, it integrates beautifully with FilePond.
+
+[Learn more about Doka](https://pqina.nl/doka/)
+
+<img src="https://github.com/pqina/filepond-github-assets/blob/master/doka.gif?raw=true" width="478" alt=""/>
+
+---
 
 
 ## Installation
