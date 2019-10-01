@@ -24,7 +24,7 @@ React FilePond is a handy wrapper component for [FilePond](https://github.com/pq
 
 ### Also need Image Editing?
 
-**Doka.js** might be just what you're looking for. It's a Modern JavaScript Image Editor, Doka supports setting **crop aspect ratios**, **resizing**, **rotating**, **cropping**, and **flipping** images. Above all, it integrates beautifully with FilePond.
+**Doka.js** might be just what you are looking for. It's a Modern JavaScript Image Editor, Doka supports setting **crop aspect ratios**, **resizing**, **rotating**, **cropping**, and **flipping** images. Above all, it integrates beautifully with FilePond.
 
 [Learn more about Doka](https://pqina.nl/doka/)
 
