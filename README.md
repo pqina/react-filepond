@@ -131,6 +131,7 @@ class App extends Component {
           ref={ref => (this.pond = ref)}
           files={this.state.files}
           allowMultiple={true}
+          allowReorder={true}
           maxFiles={3}
           server="/api"
           name="files" {/* sets the file input name, it's filepond by default */}
@@ -151,4 +152,4 @@ class App extends Component {
 
 [Read the docs for more information](https://pqina.nl/filepond/docs/patterns/frameworks/react/)
 
-[Live Demo on Code Sandbox](https://codesandbox.io/s/github/KimGenius/React-file-pond)
+[Live Demo on Code Sandbox](https://codesandbox.io/s/react-filepond-live-demo-iw9ri)
