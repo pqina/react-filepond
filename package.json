@@ -1,6 +1,6 @@
 {
   "name": "react-filepond",
-  "version": "7.0.1",
+  "version": "7.0.2",
   "description": "A handy FilePond adapter component for React",
   "homepage": "https://pqina.nl/filepond",
   "license": "MIT",
