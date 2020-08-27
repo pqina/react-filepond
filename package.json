@@ -51,6 +51,7 @@
     "mkdirp": "^0.5.1",
     "nodemon": "^1.17.3",
     "react": "^16.13.1",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.6",
+    "filepond": ">=3.7.x <5.x"
   }
 }
