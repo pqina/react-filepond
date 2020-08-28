@@ -1,3 +1,16 @@
+/*!
+ * react-filepond v7.0.1
+ * A handy FilePond adapter component for React
+ *
+ * Copyright (c) 2020 PQINA
+ * https://pqina.nl/filepond
+ *
+ * Licensed under the MIT license.
+ */
+
+// Based on definitions by Zach Posten for React-Filepond <https://github.com/zposten>
+// Updated by FilePond Contributors
+
 // See the docs for more info on any given prop
 // https://pqina.nl/filepond/docs/patterns/api/filepond-instance/#setting-options
 
