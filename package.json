@@ -30,7 +30,8 @@
         "build:browser": "babel lib | bannerjs -m > dist/react-filepond.js",
         "build:module": "minicat lib/index.js | bannerjs -m > dist/react-filepond.esm.js",
         "build:watch": "nodemon --watch lib -x \"npm run build\"",
-        "prepare": "npm run build"
+        "prepare": "npm run build",
+        "dtslint": "dtslint types"
     },
     "peerDependencies": {
         "react-dom": "^16.0.0",
@@ -38,13 +39,17 @@
         "filepond": ">=3.7.x <5.x"
     },
     "devDependencies": {
+        "@types/react": "^16.9.48",
         "babel-cli": "^6.26.0",
         "babel-core": "^6.26.0",
         "babel-preset-env": "^1.6.1",
         "babel-preset-react": "^6.24.1",
         "bannerjs": "^1.0.5",
+        "dtslint": "^3.7.0",
+        "filepond": ">=3.7.x <5.x",
         "minicat": "^1.0.0",
         "mkdirp": "^0.5.1",
-        "nodemon": "^1.17.3"
+        "nodemon": "^1.17.3",
+        "typescript": "^4.0.2"
     }
 }
