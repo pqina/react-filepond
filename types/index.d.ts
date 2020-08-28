@@ -19,8 +19,6 @@ import {
   FilePondOptions,
 } from 'filepond';
 
-export {};
-
 export {
   FileStatus,
   Status,
