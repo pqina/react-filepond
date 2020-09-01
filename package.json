@@ -24,6 +24,7 @@
         "name": "PQINA",
         "url": "https://pqina.nl"
     },
+    "types": "types/index.d.ts",
     "scripts": {
         "start": "npm run build:watch",
         "build": "mkdirp dist && npm run build:browser && npm run build:module",
