@@ -44,31 +44,20 @@ export interface FilePondProps extends FilePondOptions {
 export class FilePond extends React.Component<FilePondProps> {}
 
 /*
-According to react-filepond implementation, every FilePond instance key is cloned except these:
-(see <https://github.com/pqina/react-filepond/blob/7deaee287dd24614706f2401dcf39df6207ef5ef/lib/index.js#L13>
-  and <https://github.com/pqina/react-filepond/blob/7deaee287dd24614706f2401dcf39df6207ef5ef/lib/index.js#L56-L61>)
+According to react-filepond implementation, every FilePond instance key is cloned except some from an array, see
+<https://github.com/pqina/react-filepond/blob/7deaee287dd24614706f2401dcf39df6207ef5ef/lib/index.js#L13> and
+<https://github.com/pqina/react-filepond/blob/7deaee287dd24614706f2401dcf39df6207ef5ef/lib/index.js#L56-L61>.
 
-- setOptions
-- on
-- off
-- onOnce
-- appendTo
-- insertAfter
-- insertBefore
-- isAttachedTo
-- replaceElement
-- restoreElement
-- destroy
+Exluded keys as of 2020-08-27:
+*/
+type FilteredMethods = 'setOptions' | 'on' | 'off' | 'onOnce' | 'appendTo' |
+  'insertAfter' | 'insertBefore' | 'isAttachedTo' |
+  'replaceElement' | 'restoreElement' | 'destroy' | keyof FilePondOptions;
 
-(as of 2020-08-27)
-
+/*
 We mix cloned methods into FilePond class declared above by declaring FilePond a SECOND TIME
 as an interface (this is possible, see <https://www.typescriptlang.org/docs/handbook/declaration-files/deep-dive.html#adding-using-an-interface>
 "This also works with classes: [...]")
 */
-
-type FilteredMethods = 'setOptions' | 'on' | 'off' | 'onOnce' | 'appendTo' |
-  'insertAfter' | 'insertBefore' | 'isAttachedTo' |
-  'replaceElement' | 'restoreElement' | 'destroy' | keyof FilePondOptions;
 
 export interface FilePond extends Omit<Upstream_FilePond, FilteredMethods> {}
