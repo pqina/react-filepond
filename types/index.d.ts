@@ -17,7 +17,7 @@
 import * as React from 'react';
 
 import {
-  FilePond as Upstream_FilePond,
+  FilePond as UpstreamFilePond,
   FilePondOptions,
 } from 'filepond';
 
@@ -60,4 +60,4 @@ as an interface (this is possible, see <https://www.typescriptlang.org/docs/hand
 "This also works with classes: [...]")
 */
 
-export interface FilePond extends Omit<Upstream_FilePond, FilteredMethods> {}
+export interface FilePond extends Omit<UpstreamFilePond, FilteredMethods> {}
