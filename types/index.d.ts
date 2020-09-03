@@ -38,7 +38,9 @@ export {
 } from 'filepond';
 
 export interface FilePondProps extends FilePondOptions {
-  acceptedFileTypes?: React.InputHTMLAttributes<any>['accept'];
+  // (Temporarily) changed to old definition, see discussion at <https://github.com/pqina/react-filepond/pull/151>
+  // acceptedFileTypes?: React.InputHTMLAttributes<any>['accept'];
+  acceptedFileTypes?: string[];
 }
 
 export class FilePond extends React.Component<FilePondProps> {}
