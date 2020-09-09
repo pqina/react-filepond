@@ -1,5 +1,5 @@
 /*!
- * react-filepond v7.0.1
+ * react-filepond v7.1.0
  * A handy FilePond adapter component for React
  * 
  * Copyright (c) 2020 PQINA

@@ -1,5 +1,10 @@
 # Changelog
 
+## 7.1.0
+
+- Add React types, please uninstall `@types/react-filepond`
+
+
 ## 7.0.0
 
 - Update `filepond` peer dependency to match version 4.0.0
