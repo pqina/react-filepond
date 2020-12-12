@@ -14,14 +14,14 @@ A clear and concise description of what the bug is.
 Please include browser console and server logs around the time this bug occurred.
 
 
-**To Reproduce**
+**To reproduce**
 To help us help you, if you've found a bug please consider the following:
 
-* If you can demonstrate the bug, please do so by forking [this codesandbox](https://codesandbox.io/s/react-filepond-iwqq5).
+* Please take the time to demonstrate the bug, you can do so by forking [this codesandbox](https://codesandbox.io/s/react-filepond-iwqq5)
 * If that's not possible, we recommend creating a small repo that illustrates the problem.
 * Reproductions should be [small, self-contained, correct examples](http://sscce.org).
 
-Occasionally, this won't be possible, and that's fine – we still appreciate you raising the issue. But please understand that the more details you provide, the more inclined others are to help you out and the faster the issue can be resolved.
+Occasionally, this won't be possible, and that's fine – we still appreciate you raising the issue. But please understand that the more details you provide, the more inclined others are to help you out and the faster the issue can be resolved. If a reproduction isn't supplied there's a high chance we'll ask for one.
 
 Please [format code snippets](https://help.github.com/articles/creating-and-highlighting-code-blocks/) using triple backticks and set the appropriate language.
 
