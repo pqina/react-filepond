@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.1.1
+
+- Up version of React dependency.
+
 ## 7.1.0
 
 - Add React types, please uninstall `@types/react-filepond`
