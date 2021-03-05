@@ -27,7 +27,7 @@ React FilePond is a handy wrapper component for [FilePond](https://github.com/pq
 
 [Learn more about Doka](https://pqina.nl/doka/?ref=github-react-filepond)
 
-<img src="https://github.com/pqina/filepond-github-assets/blob/master/doka.gif?raw=true" width="478" alt=""/>
+<img src="https://github.com/pqina/filepond-github-assets/blob/master/filepond_doka.gif?raw=true" width="600" alt=""/>
 
 ---
 
