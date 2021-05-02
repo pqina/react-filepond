@@ -134,7 +134,7 @@ class App extends Component {
           allowReorder={true}
           maxFiles={3}
           server="/api"
-          name="files" {/* sets the file input name, it's filepond by default */}
+          name="files" /* sets the file input name, it's filepond by default */
           oninit={() => this.handleInit()}
           onupdatefiles={fileItems => {
             // Set currently active file objects to this.state
