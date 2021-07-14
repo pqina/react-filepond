@@ -4,7 +4,7 @@ React FilePond is a handy wrapper component for [FilePond](https://github.com/pq
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/pqina/react-filepond/blob/master/LICENSE)
 [![npm version](https://badge.fury.io/js/react-filepond.svg)](https://www.npmjs.com/package/react-filepond)
-
+![npm](https://img.shields.io/npm/dt/react-filepond)
 
 ---
 
