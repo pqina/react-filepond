@@ -8,7 +8,7 @@ React FilePond is a handy wrapper component for [FilePond](https://github.com/pq
 
 ---
 
-<img src="https://github.com/pqina/filepond-github-assets/blob/master/header.svg" alt="FilePond"/>
+[<img src="https://github.com/pqina/filepond-github-assets/blob/master/header.svg" alt="FilePond"/>](https://www.buymeacoffee.com/rikschennink/)
 
 [Buy me a Coffee](https://www.buymeacoffee.com/rikschennink/) / [Use FilePond with Pintura](https://pqina.nl/pintura/?ref=github-filepond) / [Dev updates on Twitter](https://twitter.com/rikschennink/)
 
