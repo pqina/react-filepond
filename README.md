@@ -4,8 +4,15 @@ React FilePond is a handy wrapper component for [FilePond](https://github.com/pq
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/pqina/react-filepond/blob/master/LICENSE)
 [![npm version](https://badge.fury.io/js/react-filepond.svg)](https://www.npmjs.com/package/react-filepond)
+![npm](https://img.shields.io/npm/dt/react-filepond)
 
-<img src="https://github.com/pqina/filepond-github-assets/blob/master/filepond-animation-01.gif" width="370" alt=""/>
+---
+
+[<img src="https://github.com/pqina/filepond-github-assets/blob/master/header.svg" alt="FilePond"/>](https://www.buymeacoffee.com/rikschennink/)
+
+[Buy me a Coffee](https://www.buymeacoffee.com/rikschennink/) / [Use FilePond with Pintura](https://pqina.nl/pintura/?ref=github-filepond) / [Dev updates on Twitter](https://twitter.com/rikschennink/)
+
+---
 
 ### Core Features
 
@@ -18,16 +25,18 @@ React FilePond is a handy wrapper component for [FilePond](https://github.com/pq
 
 [Learn more about FilePond](https://pqina.nl/filepond/)
 
+<img src="https://github.com/pqina/filepond-github-assets/blob/master/filepond-animation-01.gif" width="370" alt=""/>
+
 
 ---
 
 ### Also need Image Editing?
 
-**Doka.js** might be just what you're looking for. It's a Modern JavaScript Image Editor, Doka supports setting **crop aspect ratios**, **resizing**, **rotating**, **cropping**, and **flipping** images. Above all, it integrates beautifully with FilePond.
+**Pintura the modern JavaScript Image Editor** is what you're looking for. Pintura supports setting **crop aspect ratios**, **resizing**, **rotating**, **cropping**, and **flipping** images. Above all, it integrates beautifully with FilePond.
 
-[Learn more about Doka](https://pqina.nl/doka/?ref=github-react-filepond)
+[Learn more about Pintura](https://pqina.nl/pintura/?ref=github-react-filepond)
 
-<img src="https://github.com/pqina/filepond-github-assets/blob/master/doka.gif?raw=true" width="478" alt=""/>
+<img src="https://github.com/pqina/filepond-github-assets/blob/master/filepond_pintura.gif?raw=true" width="600" alt=""/>
 
 ---
 
