@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.1.2
+
+- Fix error thrown in `<Strict>` mode.
+
 ## 7.1.1
 
 - Up version of React dependency.
@@ -8,17 +12,14 @@
 
 - Add React types, please uninstall `@types/react-filepond`
 
-
 ## 7.0.0
 
 - Update `filepond` peer dependency to match version 4.0.0
 - Add example folder
 
-
 ## 6.0.1
 
 - Fix typo in README
-
 
 ## 6.0.0
 
@@ -31,6 +32,5 @@
 - Please make sure you update FilePond core dependency to 3.7.7
 
 - Add CHANGELOG.md
-
 
 ## For earlier changes, please see commit history

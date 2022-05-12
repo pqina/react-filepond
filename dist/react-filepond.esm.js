@@ -1,17 +1,17 @@
 /*!
- * react-filepond v7.1.1
+ * react-filepond v7.1.2
  * A handy FilePond adapter component for React
  * 
- * Copyright (c) 2021 PQINA
+ * Copyright (c) 2022 PQINA
  * https://pqina.nl/filepond
  * 
  * Licensed under the MIT license.
  */
 
-import React, { createElement } from 'react';
+import React, { createElement, useCallback } from "react";
 
 // Import required methods and styles from the FilePond module, should not need anything else
-import { create, supported, registerPlugin, FileStatus } from 'filepond';
+import { create, supported, registerPlugin, FileStatus } from "filepond";
 
 // We need to be able to call the registerPlugin method directly so we can add plugins
 export { registerPlugin, FileStatus };
@@ -21,22 +21,21 @@ const isSupported = supported();
 
 // filtered methods
 const filteredMethods = [
-  'setOptions',
-  'on',
-  'off',
-  'onOnce',
-  'appendTo',
-  'insertAfter',
-  'insertBefore',
-  'isAttachedTo',
-  'replaceElement',
-  'restoreElement',
-  'destroy'
+  "setOptions",
+  "on",
+  "off",
+  "onOnce",
+  "appendTo",
+  "insertAfter",
+  "insertBefore",
+  "isAttachedTo",
+  "replaceElement",
+  "restoreElement",
+  "destroy",
 ];
 
 // The React <FilePond/> wrapper
 export class FilePond extends React.Component {
-
   constructor(props) {
     super(props);
     this.allowFilesSync = true;
@@ -44,6 +43,9 @@ export class FilePond extends React.Component {
 
   // Will setup FilePond instance when mounted
   componentDidMount() {
+    // clone the input so we can restore it in unmount
+    this._input = this._element.querySelector('input[type="file"]');
+    this._inputClone = this._input.cloneNode();
 
     // exit here if not supported
     if (!isSupported) return;
@@ -56,16 +58,16 @@ export class FilePond extends React.Component {
       options.onupdatefiles = (items) => {
         this.allowFilesSync = false;
         cb(items);
-      }
+      };
     }
-    
+
     // Create our pond
-    this._pond = create(this._element, options);
+    this._pond = create(this._input, options);
 
     // Reference pond methods to FilePond component instance
     Object.keys(this._pond)
-      .filter(key => !filteredMethods.includes(key))
-      .forEach(key => {
+      .filter((key) => !filteredMethods.includes(key))
+      .forEach((key) => {
         this[key] = this._pond[key];
       });
   }
@@ -74,8 +76,20 @@ export class FilePond extends React.Component {
   componentWillUnmount() {
     // exit when no pond defined
     if (!this._pond) return;
+
+    // This fixed <Strict> errors
+
+    // FilePond destroy is async so we have to move FilePond to a bin element so it can no longer affect current element tree as React unmount / mount is sync
+    const bin = document.createElement("div");
+    bin.append(this._pond.element);
+    bin.id = "foo";
+
+    // now we call destroy so FilePond can start it's destroy logic
     this._pond.destroy();
-    this.allowFilesSync = true;
+    this._pond = undefined;
+
+    // we re-add the original file input element so everything is as it was before
+    this._element.append(this._inputClone);
   }
 
   shouldComponentUpdate() {
@@ -88,7 +102,6 @@ export class FilePond extends React.Component {
 
   // Something changed
   componentDidUpdate() {
-
     // exit when no pond defined
     if (!this._pond) return;
 
@@ -110,13 +123,16 @@ export class FilePond extends React.Component {
       allowMultiple,
       required,
       captureMethod,
-      acceptedFileTypes
+      acceptedFileTypes,
     } = this.props;
     return createElement(
-      'div',
-      { className: 'filepond--wrapper' },
-      createElement('input', {
-        type: 'file',
+      "div",
+      {
+        className: "filepond--wrapper",
+        ref: (element) => (this._element = element),
+      },
+      createElement("input", {
+        type: "file",
         name,
         id,
         accept: acceptedFileTypes,
@@ -124,7 +140,6 @@ export class FilePond extends React.Component {
         required: required,
         className: className,
         capture: captureMethod,
-        ref: element => (this._element = element)
       })
     );
   }

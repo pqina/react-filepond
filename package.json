@@ -1,56 +1,56 @@
 {
-    "name": "react-filepond",
-    "version": "7.1.1",
-    "description": "A handy FilePond adapter component for React",
-    "homepage": "https://pqina.nl/filepond",
-    "license": "MIT",
-    "repository": "pqina/react-filepond",
-    "main": "dist/react-filepond.js",
-    "browser": "dist/react-filepond.js",
-    "module": "dist/react-filepond.esm.js",
-    "keywords": [
-        "react",
-        "reactjs",
-        "filepond",
-        "file",
-        "upload",
-        "drag",
-        "drop",
-        "browse",
-        "image",
-        "preview"
-    ],
-    "author": {
-        "name": "PQINA",
-        "url": "https://pqina.nl"
-    },
-    "types": "types/index.d.ts",
-    "scripts": {
-        "start": "npm run build:watch",
-        "build": "mkdirp dist && npm run build:browser && npm run build:module",
-        "build:browser": "babel lib | bannerjs -m > dist/react-filepond.js",
-        "build:module": "minicat lib/index.js | bannerjs -m > dist/react-filepond.esm.js",
-        "build:watch": "nodemon --watch lib -x \"npm run build\"",
-        "prepare": "npm run build",
-        "dtslint": "dtslint types"
-    },
-    "peerDependencies": {
-        "react": "16 - 18",
-        "react-dom": "16 - 18",
-        "filepond": ">=3.7.x < 5.x"
-    },
-    "devDependencies": {
-        "@types/react": "^16.9.48",
-        "babel-cli": "^6.26.0",
-        "babel-core": "^6.26.0",
-        "babel-preset-env": "^1.6.1",
-        "babel-preset-react": "^6.24.1",
-        "bannerjs": "^1.0.5",
-        "dtslint": "^3.7.0",
-        "filepond": ">=3.7.x <5.x",
-        "minicat": "^1.0.0",
-        "mkdirp": "^0.5.1",
-        "nodemon": "^1.17.3",
-        "typescript": "^4.0.2"
-    }
+  "name": "react-filepond",
+  "version": "7.1.2",
+  "description": "A handy FilePond adapter component for React",
+  "homepage": "https://pqina.nl/filepond",
+  "license": "MIT",
+  "repository": "pqina/react-filepond",
+  "main": "dist/react-filepond.js",
+  "browser": "dist/react-filepond.js",
+  "module": "dist/react-filepond.esm.js",
+  "keywords": [
+    "react",
+    "reactjs",
+    "filepond",
+    "file",
+    "upload",
+    "drag",
+    "drop",
+    "browse",
+    "image",
+    "preview"
+  ],
+  "author": {
+    "name": "PQINA",
+    "url": "https://pqina.nl"
+  },
+  "types": "types/index.d.ts",
+  "scripts": {
+    "start": "npm run build:watch",
+    "build": "mkdirp dist && npm run build:browser && npm run build:module",
+    "build:browser": "babel lib | bannerjs -m > dist/react-filepond.js && minicat dist/react-filepond.js > example/src/react-filepond/index.js",
+    "build:module": "minicat lib/index.js | bannerjs -m > dist/react-filepond.esm.js",
+    "build:watch": "nodemon --watch lib -x \"npm run build\"",
+    "prepare": "npm run build",
+    "dtslint": "dtslint types"
+  },
+  "peerDependencies": {
+    "react": "16 - 18",
+    "react-dom": "16 - 18",
+    "filepond": ">=3.7.x < 5.x"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.48",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "bannerjs": "^1.0.5",
+    "dtslint": "^3.7.0",
+    "filepond": ">=3.7.x <5.x",
+    "minicat": "^1.0.0",
+    "mkdirp": "^0.5.1",
+    "nodemon": "^1.17.3",
+    "typescript": "^4.0.2"
+  }
 }
