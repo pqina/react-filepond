@@ -8,66 +8,90 @@
  * Licensed under the MIT license.
  */
 
-import React, { useRef, useEffect, useState } from 'react';
-import { create, supported, FileStatus, registerPlugin } from 'filepond';
+import React, { useEffect, useRef } from "react";
+import { create, supported } from "filepond";
 
-// Import any necessary styles for FilePond here
+export const FilePond = (props) => {
+  const elementRef = useRef(null); // Ref for the wrapper element
+  const inputRef = useRef(null); // Ref for the input element
+  const pondRef = useRef(null); // Ref for the FilePond instance
+  let allowFilesSync = true; // Flag to prevent race condition
 
-// Register any plugins if needed
-registerPlugin(/* your plugins here */);
+  // Check if FilePond is supported
+  const isSupported = supported();
 
-const FilePond = (props) => {
-  const [allowFilesSync, setAllowFilesSync] = useState(true);
-  const pondRef = useRef(null);
-  const inputRef = useRef(null);
-  const wrapperRef = useRef(null);
+  // Define filtered methods
+  const filteredMethods = [
+    "setOptions",
+    "on",
+    "off",
+    "onOnce",
+    "appendTo",
+    "insertAfter",
+    "insertBefore",
+    "isAttachedTo",
+    "replaceElement",
+    "restoreElement",
+    "destroy",
+  ];
 
-  const handleFileChange = (event) => {
-    if (props.onupdatefiles) {
-      setAllowFilesSync(false);
-      props.onupdatefiles(event.target.files);
+  // Clone the input element when component mounts
+  useEffect(() => {
+    inputRef.current = elementRef.current.querySelector('input[type="file"]');
+    inputRef.currentClone = inputRef.current.cloneNode();
+
+    // Exit if FilePond is not supported
+    if (!isSupported) return;
+
+    const options = { ...props };
+
+    // If onupdatefiles is defined, prevent race condition
+    if (options.onupdatefiles) {
+      const cb = options.onupdatefiles;
+      options.onupdatefiles = (items) => {
+        allowFilesSync = false;
+        cb(items);
+      };
     }
-  };
 
-  const initializeFilePond = () => {
-    if (!supported()) return;
+    // Create FilePond instance
+    pondRef.current = create(inputRef.current, options);
 
-    const input = inputRef.current;
-    const inputClone = input.cloneNode();
-    inputClone.addEventListener('change', handleFileChange);
+    // Reference pond methods to component instance
+    Object.keys(pondRef.current)
+        .filter((key) => !filteredMethods.includes(key))
+        .forEach((key) => {
+          FilePond[key] = pondRef.current[key];
+        });
 
-    input.remove();
-    wrapperRef.current.appendChild(inputClone);
+    // Clean up FilePond instance when component unmounts
+    return () => {
+      if (!pondRef.current) return;
+
+      const bin = document.createElement("div");
+      bin.append(pondRef.current.element);
+      bin.id = "foo";
+
+      pondRef.current.destroy();
+      pondRef.current = undefined;
+
+      elementRef.current.append(inputRef.currentClone);
+    };
+  }, []);
+
+  // Prevent unnecessary updates when files are being updated
+  useEffect(() => {
+    if (!pondRef.current) return;
 
     const options = { ...props };
     delete options.onupdatefiles;
 
-    const pond = create(inputClone, options);
-
-    Object.keys(pond)
-        .filter((key) => !filteredMethods.includes(key))
-        .forEach((key) => {
-          pondRef.current[key] = pond[key];
-        });
-
-    return () => {
-      pond.destroy();
-      wrapperRef.current.appendChild(input);
-    };
-  };
-
-  useEffect(initializeFilePond, [props]);
-
-  useEffect(() => {
-    if (pondRef.current && props) {
-      const options = { ...props };
-      delete options.onupdatefiles;
-      pondRef.current.setOptions(options);
-    }
+    pondRef.current.setOptions(options);
   }, [props]);
 
+  // Render the wrapper element and input element
   return (
-      <div className="filepond--wrapper" ref={wrapperRef}>
+      <div className="filepond--wrapper" ref={elementRef}>
         <input
             type="file"
             name={props.name}
@@ -77,10 +101,7 @@ const FilePond = (props) => {
             required={props.required}
             className={props.className}
             capture={props.captureMethod}
-            ref={inputRef}
         />
       </div>
   );
 };
-
-export { FilePond, FileStatus, registerPlugin };
