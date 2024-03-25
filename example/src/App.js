@@ -1,78 +1,66 @@
-import React, { Component } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "./App.css";
-
-// Import React FilePond
-import { FilePond, registerPlugin } from "./react-filepond";
-
-// Import FilePond styles
+import { FilePond } from "./react-filepond";
 import "filepond/dist/filepond.min.css";
-
-// Import the Image EXIF Orientation and Image Preview plugins
-// Note: These need to be installed separately
-// `npm i filepond-plugin-image-preview filepond-plugin-image-exif-orientation --save`
+import {registerPlugin} from "filepond"
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 
-// Register the plugins
+// Register FilePond plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
-// Component
-class App extends Component {
-  constructor(props) {
-    super(props);
+// Functional component App
+const App = () => {
+  // Create a ref to the FilePond component instance
+  const pondRef = useRef(null);
+  // Manage files state
+  const [files, setFiles] = useState([
+    {
+      source: "photo.jpeg",
+      options: {
+        type: "local",
+      },
+    },
+  ]);
 
-    this.state = {
-      // Set initial files, type 'local' means this is a file
-      // that has already been uploaded to the server (see docs)
-      files: [
-        {
-          source: "photo.jpeg",
-          options: {
-            type: "local",
-          },
-        },
-      ],
-    };
-  }
+  // Effect to log a message when the component mounts
+  useEffect(() => {
+    console.log("FilePond instance has initialized", pondRef.current);
+  }, []);
 
-  handleInit() {
-    console.log("FilePond instance has initialised", this.pond);
-  }
+  // Function to handle file updates
+  const handleUpdateFiles = (fileItems) => {
+    setFiles(fileItems.map((fileItem) => fileItem.file));
+  };
 
-  render() {
-    return (
+  // Render the component
+  return (
       <div className="App">
+        {/* FilePond component */}
         <FilePond
-          ref={(ref) => (this.pond = ref)}
-          files={this.state.files}
-          allowMultiple={true}
-          server={{
-            // fake server to simulate loading a 'local' server file and processing a file
-            process: (fieldName, file, metadata, load) => {
-              // simulates uploading a file
-              setTimeout(() => {
-                load(Date.now());
-              }, 1500);
-            },
-            load: (source, load) => {
-              // simulates loading a file from the server
-              fetch(source)
-                .then((res) => res.blob())
-                .then(load);
-            },
-          }}
-          oninit={() => this.handleInit()}
-          onupdatefiles={(fileItems) => {
-            // Set currently active file objects to this.state
-            this.setState({
-              files: fileItems.map((fileItem) => fileItem.file),
-            });
-          }}
-        ></FilePond>
+            ref={pondRef}
+            files={files}
+            allowMultiple={true}
+            server={{
+              // Fake server to simulate loading a 'local' server file and processing a file
+              process: (fieldName, file, metadata, load) => {
+                setTimeout(() => {
+                  load(Date.now());
+                }, 1500);
+              },
+              // Load a file from the server
+              load: (source, load) => {
+                fetch(source)
+                    .then((res) => res.blob())
+                    .then(load);
+              },
+            }}
+            // Handle file updates
+            onupdatefiles={handleUpdateFiles}
+        />
       </div>
-    );
-  }
-}
+  );
+};
 
 export default App;

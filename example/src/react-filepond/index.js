@@ -8,178 +8,100 @@
  * Licensed under the MIT license.
  */
 
-"use strict";
+import React, { useEffect, useRef } from "react";
+import { create, supported } from "filepond";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.FilePond = exports.FileStatus = exports.registerPlugin = undefined;
+export const FilePond = (props) => {
+  const elementRef = useRef(null); // Ref for the wrapper element
+  const inputRef = useRef(null); // Ref for the input element
+  const pondRef = useRef(null); // Ref for the FilePond instance
+  let allowFilesSync = true; // Flag to prevent race condition
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+  // Check if FilePond is supported
+  const isSupported = supported();
 
-var _react = require("react");
+  // Define filtered methods
+  const filteredMethods = [
+    "setOptions",
+    "on",
+    "off",
+    "onOnce",
+    "appendTo",
+    "insertAfter",
+    "insertBefore",
+    "isAttachedTo",
+    "replaceElement",
+    "restoreElement",
+    "destroy",
+  ];
 
-var _react2 = _interopRequireDefault(_react);
+  // Clone the input element when component mounts
+  useEffect(() => {
+    inputRef.current = elementRef.current.querySelector('input[type="file"]');
+    inputRef.currentClone = inputRef.current.cloneNode();
 
-var _filepond = require("filepond");
+    // Exit if FilePond is not supported
+    if (!isSupported) return;
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+    const options = { ...props };
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-// Import required methods and styles from the FilePond module, should not need anything else
-
-
-// We need to be able to call the registerPlugin method directly so we can add plugins
-exports.registerPlugin = _filepond.registerPlugin;
-exports.FileStatus = _filepond.FileStatus;
-
-// Do this once
-
-var isSupported = (0, _filepond.supported)();
-
-// filtered methods
-var filteredMethods = ["setOptions", "on", "off", "onOnce", "appendTo", "insertAfter", "insertBefore", "isAttachedTo", "replaceElement", "restoreElement", "destroy"];
-
-// The React <FilePond/> wrapper
-
-var FilePond = exports.FilePond = function (_React$Component) {
-  _inherits(FilePond, _React$Component);
-
-  function FilePond(props) {
-    _classCallCheck(this, FilePond);
-
-    var _this = _possibleConstructorReturn(this, (FilePond.__proto__ || Object.getPrototypeOf(FilePond)).call(this, props));
-
-    _this.allowFilesSync = true;
-    return _this;
-  }
-
-  // Will setup FilePond instance when mounted
-
-
-  _createClass(FilePond, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      // clone the input so we can restore it in unmount
-      this._input = this._element.querySelector('input[type="file"]');
-      this._inputClone = this._input.cloneNode();
-
-      // exit here if not supported
-      if (!isSupported) return;
-
-      var options = Object.assign({}, this.props);
-
-      // if onupdate files is defined, make sure setFiles does not cause race condition
-      if (options.onupdatefiles) {
-        var cb = options.onupdatefiles;
-        options.onupdatefiles = function (items) {
-          _this2.allowFilesSync = false;
-          cb(items);
-        };
-      }
-
-      // Create our pond
-      this._pond = (0, _filepond.create)(this._input, options);
-
-      // Reference pond methods to FilePond component instance
-      Object.keys(this._pond).filter(function (key) {
-        return !filteredMethods.includes(key);
-      }).forEach(function (key) {
-        _this2[key] = _this2._pond[key];
-      });
+    // If onupdatefiles is defined, prevent race condition
+    if (options.onupdatefiles) {
+      const cb = options.onupdatefiles;
+      options.onupdatefiles = (items) => {
+        allowFilesSync = false;
+        cb(items);
+      };
     }
 
-    // Will clean up FilePond instance when unmounted
+    // Create FilePond instance
+    pondRef.current = create(inputRef.current, options);
 
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      // exit when no pond defined
-      if (!this._pond) return;
+    // Reference pond methods to component instance
+    Object.keys(pondRef.current)
+        .filter((key) => !filteredMethods.includes(key))
+        .forEach((key) => {
+          FilePond[key] = pondRef.current[key];
+        });
 
-      // This fixed <Strict> errors
+    // Clean up FilePond instance when component unmounts
+    return () => {
+      if (!pondRef.current) return;
 
-      // FilePond destroy is async so we have to move FilePond to a bin element so it can no longer affect current element tree as React unmount / mount is sync
-      var bin = document.createElement("div");
-      bin.append(this._pond.element);
+      const bin = document.createElement("div");
+      bin.append(pondRef.current.element);
       bin.id = "foo";
 
-      // now we call destroy so FilePond can start it's destroy logic
-      this._pond.destroy();
-      this._pond = undefined;
+      pondRef.current.destroy();
+      pondRef.current = undefined;
 
-      // we re-add the original file input element so everything is as it was before
-      this._element.append(this._inputClone);
-    }
-  }, {
-    key: "shouldComponentUpdate",
-    value: function shouldComponentUpdate() {
-      if (!this.allowFilesSync) {
-        this.allowFilesSync = true;
-        return false;
-      }
-      return true;
-    }
+      elementRef.current.append(inputRef.currentClone);
+    };
+  }, []);
 
-    // Something changed
+  // Prevent unnecessary updates when files are being updated
+  useEffect(() => {
+    if (!pondRef.current) return;
 
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      // exit when no pond defined
-      if (!this._pond) return;
+    const options = { ...props };
+    delete options.onupdatefiles;
 
-      var options = Object.assign({}, this.props);
+    pondRef.current.setOptions(options);
+  }, [props]);
 
-      // this is only set onces, on didmount
-      delete options.onupdatefiles;
-
-      // update pond options based on new props
-      this._pond.setOptions(options);
-    }
-
-    // Renders basic element hook for FilePond to attach to
-
-  }, {
-    key: "render",
-    value: function render() {
-      var _this3 = this;
-
-      var _props = this.props,
-          id = _props.id,
-          name = _props.name,
-          className = _props.className,
-          allowMultiple = _props.allowMultiple,
-          required = _props.required,
-          captureMethod = _props.captureMethod,
-          acceptedFileTypes = _props.acceptedFileTypes;
-
-      return (0, _react.createElement)("div", {
-        className: "filepond--wrapper",
-        ref: function ref(element) {
-          return _this3._element = element;
-        }
-      }, (0, _react.createElement)("input", {
-        type: "file",
-        name: name,
-        id: id,
-        accept: acceptedFileTypes,
-        multiple: allowMultiple,
-        required: required,
-        className: className,
-        capture: captureMethod
-      }));
-    }
-  }]);
-
-  return FilePond;
-}(_react2.default.Component);
-
-
+  // Render the wrapper element and input element
+  return (
+      <div className="filepond--wrapper" ref={elementRef}>
+        <input
+            type="file"
+            name={props.name}
+            id={props.id}
+            accept={props.acceptedFileTypes}
+            multiple={props.allowMultiple}
+            required={props.required}
+            className={props.className}
+            capture={props.captureMethod}
+        />
+      </div>
+  );
+};
