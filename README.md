@@ -54,7 +54,7 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 // Import React FilePond
-import { FilePond, File, registerPlugin } from 'react-filepond'
+import { FilePond, registerPlugin } from 'react-filepond'
 
 // Import FilePond styles
 import 'filepond/dist/filepond.min.css'
@@ -80,7 +80,7 @@ function App() {
         allowMultiple={true}
         maxFiles={3}
         server="/api"
-        name="files" {/* sets the file input name, it's filepond by default */}
+        name="files" /* sets the file input name, it's filepond by default */
         labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
       />
     </div>
@@ -143,7 +143,7 @@ class App extends Component {
           allowReorder={true}
           maxFiles={3}
           server="/api"
-          name="files" {/* sets the file input name, it's filepond by default */}
+          name="files" /* sets the file input name, it's filepond by default */
           oninit={() => this.handleInit()}
           onupdatefiles={fileItems => {
             // Set currently active file objects to this.state
